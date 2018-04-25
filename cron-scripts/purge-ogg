@@ -6,7 +6,7 @@
 # The script uses the ogg files' last-written-to time to determine if the file is
 # older than one day.
 
-BASE_FOLDER=
+BASE_FOLDER=BBCRadioDelay
 
 logfile="$BASE_FOLDER/logs/purgelog.txt"
 
