@@ -12,7 +12,7 @@
 # is responsible for restarting ffmpeg every time ffmpeg dies, so obviously we need to kill the
 # downloader before killing ffmpeg.
 
-BASE_FOLDER=
+BASE_FOLDER=BBCRadioDelay
 
 # ============================================================
 # Restart radio2
