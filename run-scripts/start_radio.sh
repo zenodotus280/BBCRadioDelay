@@ -3,7 +3,7 @@
 # usage: ./start_radio.sh {stream name} {variable stream name} {genre}
 # Example usage: ./start_radio.sh "BBC Radio 1" "radio1" "Pop"
 
-BASE_FOLDER=
+BASE_FOLDER=BBCRadioDelay
 
 SERVER_ADDRESS="localhost"
 SERVER_PORT="8000"
