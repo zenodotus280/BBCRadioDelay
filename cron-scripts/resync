@@ -29,8 +29,6 @@ $BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 3" radio2 "Classical, Jazz, a
 # ============================================================
 # Restart 6music
 
-# restart 6music
-
 ps axf | grep downloader | grep 6music | awk '{print "kill -9 " $1}' | sh
 ps axf | grep restart-service | grep 6music | awk '{print "kill -9 " $1}' | sh
 ps axf | grep ffmpeg | grep 6music | awk '{print "kill -9 " $1}' | sh
