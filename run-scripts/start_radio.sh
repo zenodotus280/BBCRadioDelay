@@ -137,21 +137,21 @@ startstream () {
     (sleep $delay && echo "`date` Starting $1-$2" >> $logfile && ices2 "$BASE_FOLDER/ices-xml/gen-$1-$2.xml") &
 }
 
-startsolarstream () {
+startCustomstream () {
     #usage: $1: stream variable name (ie. 'radio2')
 
-    # Time Zone Delay: 3600*7=25200 // DST: 3600 // Solar Mean: 60*37+29=2249 
-    delay=31049
+    # Time Zone Delay: 3600*7=25200 // DST: 3600 // Example Solar Mean: 60*37+29=2249 
+    delay=60
     
-    echo "sleep $delay && echo \"Starting $1-Solar\" && ices2 \"$BASE_FOLDER/ices-xml/gen-$1-Solar.xml\" &" >> $logfile
-    (sleep $delay && echo "`date` Starting $1-Solar" >> $logfile && ices2 "$BASE_FOLDER/ices-xml/gen-$1-Solar.xml") &
+    echo "sleep $delay && echo \"Starting $1-Custom\" && ices2 \"$BASE_FOLDER/ices-xml/gen-$1-Custom.xml\" &" >> $logfile
+    (sleep $delay && echo "`date` Starting $1-Custom" >> $logfile && ices2 "$BASE_FOLDER/ices-xml/gen-$1-Custom.xml") &
 }
 
 echo "Starting $1 delayed stream" >> $logfile
 
 # Generate the xml files that will be read by ices2
-generate_xml "$1" $2 "$3" "Custom" #newfoundland
-generate_xml "$1" $2 "$3" 4 #atlantic
+generate_xml "$1" $2 "$3" "Custom" #Custom
+generate_xml "$1" $2 "$3" 4 #UK Minus 1
 generate_xml "$1" $2 "$3" 5 #eastern
 generate_xml "$1" $2 "$3" 6 #central
 generate_xml "$1" $2 "$3" 7 #mountain
@@ -161,7 +161,7 @@ generate_xml "$1" $2 "$3" 8 #pacific
 $BASE_FOLDER/run-scripts/downloader.sh $2 &
 
 # Start the delayed streams
-startsolarstream $2 #solar
+startCustomstream $2 #Custom
 startstream $2 1 #UK Minus 1
 startstream $2 5 #eastern
 startstream $2 6 #central
