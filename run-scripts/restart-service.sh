@@ -14,7 +14,7 @@
 # To keep the streams in sync, when a hang is discovered, we generate a blank audio file with the same
 # length as the hanging time, and we add it to the ices2 playlist.
 
-BASE_FOLDER=BBCRadioDelay
+BASE_FOLDER=/root/BBCRadioDelay
 
 filenames="$BASE_FOLDER/audio/$1_*.ogg"
 
