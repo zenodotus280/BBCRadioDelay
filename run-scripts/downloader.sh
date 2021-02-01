@@ -6,7 +6,7 @@
 # It does basic error handling, if the stream returns a 404 error or ffmpeg fails,
 # the script waits a few seconds and tries again.
 
-BASE_FOLDER=BBCRadioDelay
+BASE_FOLDER=/root/BBCRadioDelay
 
 if [ "$#" -ne 1 ]; then
     echo "Illegal number of parameters"
