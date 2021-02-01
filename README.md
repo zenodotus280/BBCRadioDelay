@@ -161,5 +161,8 @@ If the streams do not start, try checking the ices log to see if there are any a
 cat /var/log/ices/ices.log
 ```
 
+### Simplified Procedure for Starting after Rebooted Machine
+In the base folder I have added a superstart.sh script to expedite the process. Do not use this until you have successfully configured the server and started all streams successfully without it as it assumes that all the preliminary steps have been completed.
+
 # Questions?
 You can open an issue on this repository.
