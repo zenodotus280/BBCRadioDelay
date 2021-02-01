@@ -5,14 +5,11 @@
 # streams tend to get un-synchronized over time (in my experience, about 2 minutes per week)
 # and by restarting them at least once a week we get everything back on track.
 
-# NOTE: This script might require a bit of manual editing. ie, right now it is hard-coded for
-# "radio2" and "radio4fm"
-
 # Also note, the order of the killings is important. First, we kill the downloader. The downloader
 # is responsible for restarting ffmpeg every time ffmpeg dies, so obviously we need to kill the
 # downloader before killing ffmpeg.
 
-BASE_FOLDER=BBCRadioDelay
+BASE_FOLDER=/root/BBCRadioDelay
 
 # ============================================================
 # Restart radio1
@@ -24,7 +21,7 @@ ps axf | grep ices2 | grep radio1 | awk '{print "kill -9 " $1}' | sh
 
 rm $BASE_FOLDER/audio/*radio1*
 
-$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 1" radio1 "Youth"
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
 
 # ============================================================
 # Restart radio2
@@ -36,7 +33,7 @@ ps axf | grep ices2 | grep radio2 | awk '{print "kill -9 " $1}' | sh
 
 rm $BASE_FOLDER/audio/*radio2*
 
-$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 2" radio2 "Contemporary"
 
 # ============================================================
 # Restart radio3
@@ -63,6 +60,18 @@ rm $BASE_FOLDER/audio/*radio4fm*
 $BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 4" radio4fm "Talk"
 
 # ============================================================
+# Restart radio5live
+
+ps axf | grep downloader | grep radio5live | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio5live | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio5live | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio5live | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*radio5live*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 5" radio5live "Sport"
+
+# ============================================================
 # Restart 6music
 
 ps axf | grep downloader | grep 6music | awk '{print "kill -9 " $1}' | sh
@@ -72,4 +81,4 @@ ps axf | grep ices2 | grep 6music | awk '{print "kill -9 " $1}' | sh
 
 rm $BASE_FOLDER/audio/*6music*
 
-$BASE_FOLDER/run-scripts/start_radio.sh "BBC 6 Music" 6music "Alternative Music"
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 6" 6music "Alternative"
