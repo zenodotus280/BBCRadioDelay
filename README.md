@@ -1,6 +1,4 @@
-# BBC Radio Delay - Cloned to Atom 23:28 / 2019-12-27
-
-http://radioforexpats.co.uk
+# BBC Radio Delay
 
 The goal of this project is to stream BBC radio with a time-zone delay, to give the impression of "real-time listening" (as if you were in Britain) despite actually being in Canadian time zones.
 
@@ -27,7 +25,7 @@ sudo apt-get install ices2
 ### Configuring icecast2
 First we need to set passwords. These passwords will be used to control who can access the icecast2 admin panel, as well as who can set up streams to broadcast through your server. To do this, open the following file:
 ```
-vi /etc/icecast2/icecast.xml
+nano /etc/icecast2/icecast.xml
 ```
 Find the following block of code and edit the passwords as you wish. Take note of what you are setting the `source-password` to, you will need it later. You can set the `relay-password` to the same as the `source-password`.
 ```
@@ -52,7 +50,7 @@ Also find the following block of code and edit the `clients` and `sources` figur
     </limits>
 ```
 
-Lastly, you must open the following file and set `ENABLE=true`:
+Lastly, you must open the following file and insert a line of text with `ENABLE=true`:
 ```
 vi /etc/default/icecast2
 ```
@@ -64,7 +62,7 @@ Now you can start `icecast2` and when you open your server in a web browser at p
 ```
 /etc/init.d/icecast2 start
 ```
-Example: http://192.168.0.1:8000 (but make sure to replace 192.168.0.1 with your server's external IP address). You should see the icecast2 page.
+Example: http://192.168.0.1:8000 or http://localhost:8000 (but make sure to replace 192.168.0.1 with your server's external IP address). You should see the icecast2 page.
 
 #### Debugging
 If you don't see anything, as a debugging step you can try restarting the icecast service.
@@ -86,16 +84,16 @@ You are done, that was easy.
 ## Using this Project
 
 ### Configuring the scripts
-First, clone this repository.
+First, clone this repository to the location you wish to store all the files and some of the logs. For maximum convenience, log in as root (or switch with `sudo -i`) and change to the `/root` directory (`cd /root`). The scripts will require few changes by using this location. Then clone this git:
 ```
-git clone https://github.com/marcokstephen/BBCRadioDelay.git
+git clone https://github.com/zenodotus280/BBCRadioDelay.git
 cd BBCRadioDelay
 ```
 Take note of what your full directory path is. You will need to modify the scripts to use this directory path. To get your current directory, run
 ```
 pwd
 ```
-For example, it might show your current directory is `/root/BBCRadioDelay`. Copy this, and modify the following six files to set the `BASE_DIRECTORY` variable:
+For example, it might show your current directory is `/root` or `/home/foo`. Copy this, and modify the following six files to set the `BASE_FOLDER` variable:
 * `cron-scripts/kill-ffmpeg`
 * `cron-scripts/purge-ogg`
 * `cron-scripts/resync`
@@ -109,7 +107,7 @@ BASE_DIRECTORY=/root/BBCRadioDelay
 
 Next, you will need to open `run-scripts/start_radio.sh`.
 ```
-vi run-scripts/start_radio.sh
+nano run-scripts/start_radio.sh
 ```
 Find the `SERVER_PASSWORD` and set it to what you made the `source-password` when configuring icecast2.
 ```
@@ -134,13 +132,13 @@ run-scripts/start_radio.sh "BBC Radio 6" 6music "Music"
 ```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
 
-Once the streams start, you can view them at http://192.168.0.1:8000, (remembering to use your own IP address) and you can listen by appending your mount point name. Examples:
+Once the streams start, you can view them at http://192.168.0.1:8000 or http://localhost:8000, (remembering to use your own IP address) and you can listen by appending your mount point name. Examples:
 ```
-http://192.168.0.1:8000/radio1/3-5
-http://192.168.0.1:8000/radio2/4
-http://192.168.0.1:8000/radio4fm/5
-http://192.168.0.1:8000/radio5live/6
-http://192.168.0.1:8000/6music/7
+http://192.168.0.1:8000/radio1/1
+http://192.168.0.1:8000/radio2/5
+http://192.168.0.1:8000/radio4fm/6
+http://192.168.0.1:8000/radio5live/7
+http://192.168.0.1:8000/6music/8
 ```
 
 ### Setting up the cron jobs
@@ -150,7 +148,7 @@ The stream should be working properly at this point but there is still some main
 ```
 crontab -e
 ```
-The following will make `kill-ffmpeg` and `purge-ogg` run every day at 05:00, and `resync` will run every Sunday at 05:00. Again, make sure to replace the path to the files with whatever your file path is.
+The following will make `kill-ffmpeg` and `purge-ogg` run every day at 05:00, and `resync` will run every Sunday at 05:00. Again, make sure to replace the path to the files with whatever your file path is. It will take many hours for the audio to be ready again as old files will be removed - choosing an earlier time will ensure that the audio is ready to go by the morning.
 ```
 0 5 * * * /root/BBCRadioDelay/cron-scripts/kill-ffmpeg
 0 5 * * * /root/BBCRadioDelay/cron-scripts/purge-ogg
@@ -164,4 +162,4 @@ cat /var/log/ices/ices.log
 ```
 
 # Questions?
-You can open an issue on this repository or send an email to marcok dot stephen at gmail dot com
+You can open an issue on this repository.
