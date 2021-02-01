@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # usage: ./start_radio.sh {stream name} {variable stream name} {genre}
-# Example usage: ./start_radio.sh "BBC Radio 1" "radio1" "Pop"
+# Example usage: ./start_radio.sh "BBC Radio 1" radio1 "Pop"
 
 BASE_FOLDER=/root/BBCRadioDelay
 
