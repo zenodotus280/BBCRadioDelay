@@ -3,7 +3,7 @@
 # usage: ./start_radio.sh {stream name} {variable stream name} {genre}
 # Example usage: ./start_radio.sh "BBC Radio 1" "radio1" "Pop"
 
-BASE_FOLDER=BBCRadioDelay
+BASE_FOLDER=/root/BBCRadioDelay
 
 SERVER_ADDRESS="localhost"
 SERVER_PORT="8000"
@@ -140,7 +140,7 @@ startstream () {
 startCustomstream () {
     #usage: $1: stream variable name (ie. 'radio2')
 
-    # Time Zone Delay: 3600*7=25200 // DST: 3600 // Example Solar Mean: 60*37+29=2249 
+    # Time Zone Delay: 3600*7=25200 // DST: 3600 // Example Solar Mean: 60*37+29=2249  ... or if just testing: 60
     delay=60
     
     echo "sleep $delay && echo \"Starting $1-Custom\" && ices2 \"$BASE_FOLDER/ices-xml/gen-$1-Custom.xml\" &" >> $logfile
@@ -150,8 +150,8 @@ startCustomstream () {
 echo "Starting $1 delayed stream" >> $logfile
 
 # Generate the xml files that will be read by ices2
-generate_xml "$1" $2 "$3" "Custom" #Custom
-generate_xml "$1" $2 "$3" 4 #UK Minus 1
+generate_xml "$1" $2 "$3" "60 second" #Custom
+generate_xml "$1" $2 "$3" 1 #UK Minus 1
 generate_xml "$1" $2 "$3" 5 #eastern
 generate_xml "$1" $2 "$3" 6 #central
 generate_xml "$1" $2 "$3" 7 #mountain
