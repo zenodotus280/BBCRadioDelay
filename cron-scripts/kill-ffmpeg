@@ -7,7 +7,7 @@
 # The reason that we kill ffmpeg is so that the ogg files never become too large
 # By restarting ffmpeg, we cause a new ogg file to be created.
 
-BASE_FOLDER=BBCRadioDelay
+BASE_FOLDER=/root/BBCRadioDelay
 
 purgelog="$BASE_FOLDER/logs/purgelog.txt"
 
