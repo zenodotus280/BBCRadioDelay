@@ -1,6 +1,6 @@
 # BBC Radio Delay
 
-The goal of this project is to stream BBC radio with a time-zone delay, to give the impression of "real-time listening" (as if you were in Britain) despite actually being in Canadian time zones.
+The goal of this project is to stream BBC radio with a time-zone delay, to give the impression of "real-time listening" (as if you were in Britain) despite actually being in North American time zones.
 
 This guide will teach you how to install this project for yourself. You will require a Linux server. If you need one, you can rent one on DigitalOcean for approximately 5 USD per month. This guide assumes you are using Ubuntu.
 
@@ -41,11 +41,11 @@ Find the following block of code and edit the passwords as you wish. Take note o
     </authentication>
 ```
 
-Also find the following block of code and edit the `clients` and `sources` figures. These two figures are the limits of how many listeners your server will allow and how many radio streams your icecast2 will accomodate. If you don't know, you can make them 100 and 20 respectively.
+Also find the following block of code and edit the `clients` and `sources` figures. These two figures are the limits of how many listeners your server will allow and how many radio streams your icecast2 will accomodate. If you don't know, you can make them 100.
 ```
     <limits>
         <clients>100</clients>
-        <sources>20</sources>
+        <sources>100</sources>
         ...
     </limits>
 ```
@@ -125,10 +125,11 @@ run-scripts/start_radio.sh {stream name} {stream code} {stream genre}
 Examples:
 ```
 run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
-run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
+run-scripts/start_radio.sh "BBC Radio 2" radio2 "Contemporary"
+run-scripts/start_radio.sh "BBC Radio 3" radio3 "Classical, Jazz, and More"
 run-scripts/start_radio.sh "BBC Radio 4" radio4fm "Talk"
-run-scripts/start_radio.sh "BBC Radio 5" radio5live "Talk"
-run-scripts/start_radio.sh "BBC Radio 6" 6music "Music"
+run-scripts/start_radio.sh "BBC Radio 5" radio5live "Sport"
+run-scripts/start_radio.sh "BBC Radio 6" 6music "Alternative"
 ```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
 
@@ -161,8 +162,8 @@ If the streams do not start, try checking the ices log to see if there are any a
 cat /var/log/ices/ices.log
 ```
 
-### Simplified Procedure for Starting after Rebooted Machine
-In the base folder I have added a superstart.sh script to expedite the process. Do not use this until you have successfully configured the server and started all streams successfully without it as it assumes that all the preliminary steps have been completed.
+### Simplified Procedure for Starting after Reboot
+In the base folder I have added a `superstart.sh` script to expedite the process. Do not use this until you have successfully configured the server and started all streams successfully without it as it assumes that all the preliminary steps have been completed. It will require a permissions change first to be executable: `chmod 777 superstart.sh`. The final step if you prefer a fully-automated server is to configure this to start on boot with `crontab -e` and then adding `@reboot /root/BBCRadioDelay/superstart.sh`.
 
 # Questions?
 You can open an issue on this repository.
