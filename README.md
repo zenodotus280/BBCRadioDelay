@@ -163,7 +163,7 @@ cat /var/log/ices/ices.log
 ```
 
 ### Simplified Procedure for Starting after Reboot
-In the base folder I have added a `superstart.sh` script to expedite the process. Do not use this until you have successfully configured the server and started all streams successfully without it as it assumes that all the preliminary steps have been completed. It will require a permissions change first to be executable: `chmod 777 superstart.sh`. The final step if you prefer a fully-automated server is to configure this to start on boot with `crontab -e` and then adding `@reboot /root/BBCRadioDelay/superstart.sh`.
+In the base folder I have added a `superstart.sh` script to expedite the process. Do not use this until you have successfully configured the server and started all streams successfully without it as it assumes that all the preliminary steps have been completed. It will require a permissions change first to be executable: `chmod 555 superstart.sh`. The final step if you prefer a fully-automated server is to configure this to start on boot with `crontab -e` and then adding `@reboot /root/BBCRadioDelay/superstart.sh`.
 
 # Questions?
 You can open an issue on this repository.
