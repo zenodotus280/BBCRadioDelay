@@ -52,7 +52,7 @@ Also find the following block of code and edit the `clients` and `sources` figur
 
 Lastly, you must open the following file and insert a line of text with `ENABLE=true`:
 ```
-vi /etc/default/icecast2
+nano /etc/default/icecast2
 ```
 ```
 ENABLE=true
