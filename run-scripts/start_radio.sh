@@ -150,7 +150,7 @@ startCustomstream () {
 echo "Starting $1 delayed stream" >> $logfile
 
 # Generate the xml files that will be read by ices2
-generate_xml "$1" $2 "$3" "60 second" #Custom
+generate_xml "$1" $2 "$3" "30sec" #Custom
 generate_xml "$1" $2 "$3" 1 #UK Minus 1
 generate_xml "$1" $2 "$3" 5 #eastern
 generate_xml "$1" $2 "$3" 6 #central
