@@ -124,11 +124,11 @@ run-scripts/start_radio.sh {stream name} {stream code} {stream genre}
 ```
 Examples:
 ```
-run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
-run-scripts/start_radio.sh "BBC Radio 2" radio2 "Contemporary"
-run-scripts/start_radio.sh "BBC Radio 3" radio3 "Classical, Jazz, and More"
-run-scripts/start_radio.sh "BBC Radio 4" radio4fm "Talk"
-run-scripts/start_radio.sh "BBC Radio 5" radio5live "Sport"
+run-scripts/start_radio.sh "BBC Radio 1" radio_one "Pop"
+run-scripts/start_radio.sh "BBC Radio 2" radio_two "Contemporary"
+run-scripts/start_radio.sh "BBC Radio 3" radio_three "Classical, Jazz, and More"
+run-scripts/start_radio.sh "BBC Radio 4" radio_fourfm "Talk"
+run-scripts/start_radio.sh "BBC Radio 5" radio_five_live "Sport"
 run-scripts/start_radio.sh "BBC Radio 6" 6music "Alternative"
 ```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start at different times. "Custom" is set at 30 seconds. To save on bandwidth and CPU processing you can comment out the timezones:
@@ -136,17 +136,20 @@ You can verify that things started properly by going to the `audio` folder and s
 # generate_xml "$1" $2 "$3" 8 #pacific
 # startstream $2 8 #pacific
 ```
-You can also omit certain stations by omitting them from `resync`:
+You can also omit certain stations by omitting them from `resync` and `start_radio.sh` respectively:
 ```
-# $BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
+# $BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 1" radio_one "Pop"
+
+# startstream $2 1 #UK Minus 1
+# generate_xml "$1" $2 "$3" 1 #UK Minus 1
 ```
 
 Once the streams start, you can view them at http://192.168.0.1:8000 or http://localhost:8000, (remembering to use your own IP address) and you can listen by appending your mount point name. Examples:
 ```
-http://192.168.0.1:8000/radio1/1
-http://192.168.0.1:8000/radio2/5
-http://192.168.0.1:8000/radio4fm/6
-http://192.168.0.1:8000/radio5live/7
+http://192.168.0.1:8000/radio_one/1
+http://192.168.0.1:8000/radio_two/5
+http://192.168.0.1:8000/radio_fourfm/6
+http://192.168.0.1:8000/radio_five_live/7
 http://192.168.0.1:8000/6music/8
 ```
 

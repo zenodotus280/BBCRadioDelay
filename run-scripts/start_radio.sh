@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # usage: ./start_radio.sh {stream name} {variable stream name} {genre}
-# Example usage: ./start_radio.sh "BBC Radio 1" radio1 "Pop"
+# Example usage: ./start_radio.sh "BBC Radio 1" radio_one "Pop"
 
 BASE_FOLDER=/root/BBCRadioDelay
 
@@ -126,7 +126,7 @@ generate_xml () {
 # Calling this will make ices2 initiate after sleeping for a specified delay. This sleeping delay is what
 # gives the impression of the time-zone delays.
 startstream () {
-    # $1: stream variable name (ie. 'radio2')
+    # $1: stream variable name (ie. 'radio_two')
     # $2: hours of delay
 
     delay=$2
@@ -138,7 +138,7 @@ startstream () {
 }
 
 startCustomstream () {
-    #usage: $1: stream variable name (ie. 'radio2')
+    #usage: $1: stream variable name (ie. 'radio_two')
 
     # Time Zone Delay: 3600*7=25200 // DST: 3600 // Example Solar Mean: 60*37+29=2249  ... or if just testing: 30
     delay=30
